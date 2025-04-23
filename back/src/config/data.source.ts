@@ -4,7 +4,7 @@ import { User } from "../entities/User.entity";
 import { Credential } from "../entities/Credential.entity";
 
 
-const AppDataSource = new DataSource(
+export const AppDataSource = new DataSource(
     process.env.DATABASE_URL
       ? {
           type: "postgres",
