@@ -14,5 +14,8 @@ export const DB_PASSWORD: string | undefined = process.env.DB_PASSWORD;
 export const DB_DATABASE: string | undefined = process.env.DB_DATABASE;
 export const DB_SYNC: boolean = process.env.DB_SYNC ? process.env.DB_SYNC === "true" : true;
 export const DB_LOGGING: boolean = process.env.DB_LOGGING ? process.env.DB_LOGGING === "true" : true;
-export const DB_ENTITIES: string[] = process.env.DB_ENTITIES ? process.env.DB_ENTITIES.split(",") : ["src/entities/**/*.ts"];
+// Cambia las entidades según el entorno
+export const DB_ENTITIES: string[] = process.env.NODE_ENV === "production" 
+  ? ["dist/entities/**/*.js"] 
+  : ["src/entities/**/*.ts"];
 export const DB_DROP: boolean = process.env.DB_DROP ? process.env.DB_DROP === "true" : false;
