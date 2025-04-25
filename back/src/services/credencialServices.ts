@@ -4,6 +4,9 @@ import { CredentialModel, UserModel } from "../config/data.source";
 import { User } from "../entities/User.entity";
 
 
+
+
+
 const crypPass = async (password: string): Promise<string> => {
 
     const esconder = new TextEncoder();
@@ -20,9 +23,6 @@ const crypPass = async (password: string): Promise<string> => {
 
 export const createCredentialsServices: (entityManager: EntityManager, a: string, b: string) =>Promise<Credential> = async (entityManager: EntityManager, username: string, password: string): Promise<Credential> => {
     const passwordEncripted = await crypPass(password);
-
-    const existingCredentials = await entityManager.findOne(Credential, {where: {username}});
-    if(existingCredentials) throw new Error(`El username "${username}" ya está en uso`)
 
     const credentials: Credential = entityManager.create(Credential, {
       username,

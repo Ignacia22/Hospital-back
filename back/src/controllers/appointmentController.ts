@@ -27,34 +27,19 @@ export const getAppointmentByIdController = async (req: Request<{ id: number }>,
     }
 };
 
-export const registerAppointmentController = async (req: Request<unknown, unknown, AppointmentRegisterDTO>, res: Response): Promise<void> => {
+export const registerAppointmentController = async(req: Request<unknown, unknown, AppointmentRegisterDTO>, res: Response): Promise<void> => {
+
     try {
-      const response = await registerAppointmentService(req.body);
-      res.status(201).json({ message: "Cita creada con éxito", response });
-    } catch (error: unknown) {
-      const err = error as PostgresError; // Usamos tu interfaz PostgresError
-      if (err.code === '23505') { // Violación de unicidad (por ejemplo, horario ya ocupado)
-        const detail = err.detail || "Error de unicidad";
-        res.status(409).json({
-          message: "Conflicto con los datos proporcionados",
-          detail: detail,
+        const response = await registerAppointmentService(req.body);  // Llamada al servicio para obtener el turno por ID
+        res.status(201).json({message: "Cita creada con exito", response});
+    } catch (error) {
+        const err = error as PostgresError
+        res.status(400).json({ 
+            message:err instanceof Error ? err.detail ? err.detail: err.message: 'Error desconocido'
         });
-      } else if (error instanceof Error) {
-        // Maneja errores genéricos que no sean de base de datos
-        res.status(400).json({
-          message: "Error al crear la cita",
-          detail: error.message || "Error desconocido",
-        });
-      } else {
-        // Maneja errores desconocidos
-        console.error("Error desconocido en registerAppointmentController:", error);
-        res.status(400).json({
-          message: "Error al crear la cita",
-          detail: err.message || "Error desconocido",
-        });
-      }
     }
-  };
+
+};
 
 
 
