@@ -33,7 +33,7 @@ __decorate([
     __metadata("design:type", String)
 ], Appointment.prototype, "status", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => User_entity_1.User, user => user.appointments, { nullable: false }),
+    (0, typeorm_1.ManyToOne)(() => User_entity_1.User, (user) => user.appointments, { nullable: false }),
     (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", User_entity_1.User)
 ], Appointment.prototype, "user", void 0);

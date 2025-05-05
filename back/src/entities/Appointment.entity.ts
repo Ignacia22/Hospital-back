@@ -20,7 +20,7 @@ export class Appointment {
     status: Status
 
 
-    @ManyToOne(() => User, user => user.appointments, {nullable: false})
+    @ManyToOne(() => User, (user: User) => user.appointments, {nullable: false})
     @JoinColumn()
     user: User
 

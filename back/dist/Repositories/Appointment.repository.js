@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -51,19 +42,17 @@ exports.AppointmentRepository = data_source_1.AppDataSource.getRepository(Appoin
         }
         console.log('Cita válida:', appointmentDateTime.format('LLLL'));
     },
-    validateExistingAppointment: function (userId, date, time) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const appointmentFound = yield this.findOne({
-                where: {
-                    user: {
-                        id: userId
-                    },
-                    date: date,
-                    time: time,
-                }
-            });
-            if (appointmentFound)
-                throw new Error(`La cita con fecha: ${date}, y con hora ${time}, para el usuario con id: ${userId}, ya existe`);
+    validateExistingAppointment: async function (userId, date, time) {
+        const appointmentFound = await this.findOne({
+            where: {
+                user: {
+                    id: userId
+                },
+                date: date,
+                time: time,
+            }
         });
+        if (appointmentFound)
+            throw new Error(`La cita con fecha: ${date}, y con hora ${time}, para el usuario con id: ${userId}, ya existe`);
     }
 });

@@ -16,7 +16,7 @@ AppDataSource.initialize()
     });
    })
 
-   .catch((err) => {
+   .catch((err: Error) => {
     console.log(err);
    })
 

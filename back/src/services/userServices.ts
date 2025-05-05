@@ -3,6 +3,7 @@ import { UserDTO, UserLoginDTO, UserLoginSuccessDTO, UserRegisterDTO } from "../
 import { User } from "../entities/User.entity";
 import { checkCredentialsServices, createCredentialsServices } from "./credencialServices";
 import { Credential } from "../entities/Credential.entity";
+import { EntityManager } from "typeorm";
 
 
 
@@ -26,7 +27,7 @@ export const getUserByIdService = async (id: string): Promise<UserDTO> => {
 
 export const registerUsersService = async (user: UserRegisterDTO): Promise<User> => {
 
-    const result = await AppDataSource.transaction(async(entityManager) => {
+    const result = await AppDataSource.transaction(async(entityManager: EntityManager) => {
         const userCredentials: Credential = await createCredentialsServices(entityManager, user.username, user.password)
 
         console.log(userCredentials)
