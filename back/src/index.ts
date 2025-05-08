@@ -1,8 +1,17 @@
-import {PORT} from "./config/envs";
+import {DB_HOST, DB_PORT, DB_USERNAME, PORT} from "./config/envs";
 import server from "./server";
 
 import "reflect-metadata";
 import { AppDataSource } from "./config/data.source";
+
+
+// Imprimir variables de entorno al inicio
+console.log("Environment variables:");
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("DB_HOST:", DB_HOST);
+console.log("DB_PORT:", DB_PORT);
+console.log("DB_USERNAME:", DB_USERNAME);
+console.log("PORT:", PORT);
 
 const MAX_RETRIES = 5;
 let retries = 0;
