@@ -1,7 +1,7 @@
 import { AppointmentRegisterDTO } from "../dtos/AppointmentDTO";
 import { Status } from "../interface/IAppointment";
 import { getUserByIdService } from "./userServices";
-import { AppointmentRepository } from "../repositories/Appointment.repository";
+import { AppointmentRepository } from "../Repositories/Appointment.repository";
 import { Appointment } from "../entities/Appointment.entity";
 
 
