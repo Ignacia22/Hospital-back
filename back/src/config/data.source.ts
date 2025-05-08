@@ -3,8 +3,8 @@ import { User } from "../entities/User.entity";
 import { Credential } from "../entities/Credential.entity";
 import { DB_ENTITIES, DB_SYNC, DB_LOGGING, DB_DROP } from "./envs";
 
-// Usar URL de conexión directamente
-const DATABASE_URL = process.env.DATABASE_URL || 'postgres://postgres:postgres@localhost:5432/modulo_3';
+// Usar la URL de conexión directamente
+const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_DG6KECamc3gf@ep-winter-waterfall-a42s4j4m-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require';
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -14,7 +14,7 @@ export const AppDataSource = new DataSource({
     entities: DB_ENTITIES,
     dropSchema: DB_DROP,
     ssl: {
-        rejectUnauthorized: false
+        rejectUnauthorized: false // Necesario para conexiones SSL en Neon
     }
 });
 
